@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maaff yaa, Adahh 🤍</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ffd6e8, #ffeaf4);
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* ❤️ HATI JATUH */
+.heart-fall {
+  position: fixed;
+  top: -20px;
+  font-size: 18px;
+  animation: fall linear infinite;
+  opacity: 0.7;
+  z-index: 1;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+/* 🐱 KUCING */
+.cat {
+  position: fixed;
+  bottom: 10px;
+  font-size: 38px;
+  animation: walk 14s linear infinite;
+  z-index: 3;
+}
+
+@keyframes walk {
+  from { left: -60px; }
+  to { left: 110%; }
+}
+
+/* 💳 CARD */
+.container {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(6px);
+  width: 85%;
+  max-width: 360px;
+  padding: 26px;
+  border-radius: 22px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  text-align: center;
+  animation: fade 0.8s ease;
+}
+
+h2 {
+  color: #ff5fa2;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #555;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+button {
+  margin-top: 20px;
+  background: #ff5fa2;
+  color: white;
+  border: none;
+  padding: 11px 20px;
+  border-radius: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #ff3d8e;
+  transform: scale(1.05);
+}
+
+.heart {
+  font-size: 30px;
+  margin-bottom: 8px;
+  animation: beat 1s infinite;
+}
+
+@keyframes beat {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ❤️ HATI JATUH -->
+<script>
+for (let i = 0; i < 18; i++) {
+  const h = document.createElement("div");
+  h.className = "heart-fall";
+  h.innerText = "🤍";
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.animationDuration = 6 + Math.random() * 6 + "s";
+  h.style.fontSize = 14 + Math.random() * 14 + "px";
+  document.body.appendChild(h);
+}
+</script>
+
+<!-- 🐱 KUCING -->
+<div class="cat">🐱</div>
+
+<!-- AUDIO -->
+<audio id="bgm" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+  <div class="card" id="card">
+    <div class="heart">🤍</div>
+    <h2>Haii Adahh</h2>
+    <p>Akuu mau bilang sesuatu… pelan-pelan ajaa yaa...</p>
+    <button onclick="playMusic(); nextSlide();">Lanjut</button>
+  </div>
+</div>
+
+<script>
+let slide = 0;
+let musicStarted = false;
+
+const slides = [
+  {
+    title: "Tentang Aku",
+    text: "Aku sadar, aku bikin kesalahan yang cukup besar. Dan aku nggak mau pura-pura kuat atau sok benar."
+  },
+  {
+    title: "Jujur Sedikit",
+    text: "Kalau sikap atau kata-kataku bikin kamu capek, risih, atau kecewa… itu murni salahku."
+  },
+  {
+    title: "Perasaan",
+    text: "Tentang hal ini, aku ngerasa bahwa aku selalu nyakitin kamuu. Akuu udah nyoba untuk jadi lebih baik, tapi aku yang belum bisa karena ego akuu"
+  },
+  {
+    title: "Tentang Jarak",
+    text: "Kalau nanti aku kelihatan agak menjauh, itu bukan karena nggak suka. Tapi karena rasa ini pengen aku jaga dengan cara yang lebih dewasa."
+  },
+  {
+    title: "Pelan-pelan",
+    text: "Aku lagi belajar jadi versi yang lebih tenang, lebih paham batas, dan lebih pantas untuk hadir."
+  },
+  {
+    title: "Harapan",
+    text: "In syaa allah, kalau suatu saat akuu sudah sampai di titik yang lebih baik, dan waktu masih memberi izin… aku ingin datang lagi dengan cara yang benar."
+  },
+  {
+    title: "Terakhir 🤍",
+    text: "Terima kasih sudah mauu baca sampai sini. Maafku sederhana, tapi sungguh."
+  },
+  {
+    title: "Boleh Chat Aku?",
+    text: "Kalau kamu mau jawab, aku senang. Kalau belum, aku tetap hormati.",
+    wa: true
+  }
+];
+
+function playMusic() {
+  if (!musicStarted) {
+    const audio = document.getElementById("bgm");
+    audio.volume = 1.0;
+    audio.play().catch(()=>{});
+    musicStarted = true;
+  }
+}
+
+function nextSlide() {
+  slide++;
+  if (slide < slides.length) {
+    const s = slides[slide];
+    document.getElementById("card").innerHTML = `
+      <div class="heart">🤍</div>
+      <h2>${s.title}</h2>
+      <p>${s.text}</p>
+      ${
+        s.wa
+        ? `<a href="https://wa.me/6285759000696" target="_blank">
+             <button>Kirim Pesan WhatsApp 💬</button>
+           </a>`
+        : `<button onclick="playMusic(); nextSlide();">Lanjut</button>`
+      }
+    `;
+  }
+}
+</script>
+
+</body>
+</html>
